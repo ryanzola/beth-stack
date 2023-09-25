@@ -18,7 +18,9 @@ const app = new Elysia()
       </body>
     </BaseHtml>
   ))
-  .post('/clicked', () => <div class="text-blue-500">I'm from the server!</div>)
+  .post('/clicked', () => { 
+    return <div class="text-blue-500">I'm from the server!</div>
+  })
   .get("/todos", async () => {
     const data = await db.select().from(todos).all();
     return <TodoList todos={data} />;
@@ -77,6 +79,7 @@ const app = new Elysia()
     }
   )
   .listen(3001);
+  
 console.log(`🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`)
 
 const BaseHtml = ({ children }: elements.Children) =>  `
